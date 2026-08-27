@@ -3,36 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
 <title>Para famílias que enfrentam o Alzheimer | O banho sem briga</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
+  color-scheme: only light;
   --plum:#3D2A52; --plum-dk:#2A1B3A;
   --coral:#FF6F5E; --gold:#FFC04A; --mint:#2FC39B;
   --cream:#FFF8F1; --cream-dk:#F5E8DC;
-  --ink:#2A1B3A; --ink-soft:#6B5B7A;
+  --ink:#241533; --ink-soft:#4B3A5E;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;background:#FFF8F1;forced-color-adjust:none}
 body{
+  -webkit-font-smoothing:antialiased;
   font-family:'Plus Jakarta Sans',system-ui,sans-serif;
   background:var(--cream); color:var(--ink);
-  line-height:1.55; min-height:100dvh;
+  line-height:1.6; min-height:100dvh;
 }
 .wrap{max-width:560px;margin:0 auto;padding:0 20px;width:100%}
 h1,h2{font-family:'Outfit',sans-serif;font-weight:800;line-height:1.1;letter-spacing:-.02em}
 
 .btn{
   display:block;width:100%;text-align:center;
-  font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;
-  padding:19px 24px;border:none;border-radius:14px;cursor:pointer;
-  background:linear-gradient(135deg,#FF6F5E,#FF9147);color:#fff;
-  box-shadow:0 8px 22px rgba(255,111,94,.32);
+  font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;
+  padding:18px 24px;border:none;border-radius:16px;cursor:pointer;
+  background:linear-gradient(135deg,#2ECC71,#1FA85F);color:#fff;
+  box-shadow:0 5px 16px rgba(31,168,95,.28);
   transition:transform .16s ease,box-shadow .16s ease;
 }
-.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(255,111,94,.4)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(31,168,95,.38)}
 .btn:focus-visible{outline:3px solid var(--plum);outline-offset:3px}
 
 .screen{display:none}
@@ -54,7 +58,7 @@ h1,h2{font-family:'Outfit',sans-serif;font-weight:800;line-height:1.1;letter-spa
   font-size:clamp(20px,5.4vw,25px);line-height:1.3;
   color:var(--coral);margin-bottom:22px;
 }
-.lede{font-size:16.5px;color:var(--ink-soft);margin-bottom:12px}
+.lede{font-size:17px;color:var(--ink-soft);margin-bottom:12px}
 .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--ink-soft);font-weight:600;margin:22px 0 18px}
 .meta span::before{content:"●";color:var(--mint);margin-right:7px;font-size:9px;vertical-align:middle}
 .consent{font-size:12.5px;color:var(--ink-soft);margin-top:20px;opacity:.85}
@@ -62,9 +66,11 @@ h1,h2{font-family:'Outfit',sans-serif;font-weight:800;line-height:1.1;letter-spa
 .progress{height:8px;background:var(--cream-dk);border-radius:99px;overflow:hidden;margin-bottom:30px}
 .progress span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#FFC04A,#FF6F5E);transition:width .4s cubic-bezier(.4,0,.2,1)}
 .qcount{font-size:13px;font-weight:700;color:var(--coral);margin-bottom:10px}
-.qtext{font-size:clamp(23px,5.8vw,29px);margin-bottom:22px}
+.qtext{font-size:clamp(23px,5.8vw,29px);margin-bottom:10px}
+.qhelp{font-size:14.5px;color:var(--ink-soft);margin-bottom:20px}
 .opts{display:flex;flex-direction:column;gap:10px}
 .opt{
+  line-height:1.45;
   font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:500;
   text-align:left;line-height:1.4;background:#fff;color:var(--ink);
   border:2px solid var(--cream-dk);border-radius:14px;
@@ -77,24 +83,35 @@ h1,h2{font-family:'Outfit',sans-serif;font-weight:800;line-height:1.1;letter-spa
 .back{margin-top:22px;background:none;border:none;color:var(--ink-soft);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;padding:8px 0;align-self:flex-start}
 
 .field{
-  width:100%;font-family:inherit;font-size:16px;padding:17px;
-  border-radius:14px;margin-bottom:11px;background:#fff;
+  width:100%;font-family:inherit;font-size:17px;padding:18px;
+  border-radius:14px;margin-bottom:12px;background:#fff;
   border:2px solid var(--cream-dk);color:var(--ink);
 }
 .field:focus{outline:none;border-color:var(--coral)}
 .skip{display:block;width:100%;text-align:center;margin-top:15px;color:var(--ink-soft);font-size:14px;font-weight:600;background:none;border:none;cursor:pointer;font-family:inherit;padding:8px}
-.err{color:#C4402E;font-size:14px;margin-bottom:10px;display:none;font-weight:600}
+
+/* ---------- blindagem contra modo escuro forçado ---------- */
+html,body{background:#FFF8F1 !important;color:#241533 !important}
+.hero{color:#3D2A52 !important}
+.hero-sub{color:#E0503C !important}
+.lede,.meta,.consent,.qhelp{color:#4B3A5E !important}
+.qtext{color:#3D2A52 !important}
+.opt{background:#fff !important;color:#241533 !important}
+.field{background:#fff !important;color:#241533 !important}
+.pill{background:#FFE9D6 !important;color:#A63F27 !important}
+.btn{color:#fff !important}
+.back,.skip{color:#4B3A5E !important}
 </style>
 </head>
 <body>
 
 <section class="screen on" id="intro"><div class="wrap">
   <span class="pill">PARA FAMÍLIAS QUE ENFRENTAM O ALZHEIMER</span>
-  <h1 class="hero">Ele diz que já tomou banho.</h1>
+  <h1 class="hero">Ela diz que já tomou banho.</h1>
   <p class="hero-sub">Você sabe que não tomou.</p>
-  <p class="lede">A hora do banho virou a pior parte do dia. Você insiste, ele resiste, alguém levanta a voz.</p>
+  <p class="lede">A hora do banho virou a pior parte do dia. Você insiste, ela resiste, alguém levanta a voz.</p>
   <p class="lede">E no fim, quem se sente culpada é você.</p>
-  <div class="meta"><span>8 perguntas</span><span>2 minutos</span><span>Resultado na hora</span></div>
+  <div class="meta"><span>9 perguntas</span><span>2 minutos</span><span>Resultado na hora</span></div>
   <button class="btn" onclick="start()">Descobrir o que está travando</button>
   <p class="consent">As respostas servem só para montar o seu resultado. Conteúdo educativo — não substitui avaliação profissional.</p>
 </div></section>
@@ -103,46 +120,84 @@ h1,h2{font-family:'Outfit',sans-serif;font-weight:800;line-height:1.1;letter-spa
   <div class="progress"><span id="bar"></span></div>
   <p class="qcount" id="qcount"></p>
   <h2 class="qtext" id="qtext"></h2>
+  <p class="qhelp" id="qhelp"></p>
   <div class="opts" id="opts"></div>
   <button class="back" id="back" onclick="back()">← Voltar</button>
 </div></section>
 
 <section class="screen" id="capture"><div class="wrap">
   <span class="pill">ÚLTIMO PASSO</span>
-  <h2 class="qtext">Para onde mando seu resultado?</h2>
-  <p class="lede">Você vê tudo na tela agora. O e-mail é para reler com calma depois.</p>
-  <p class="err" id="err">Confira o e-mail digitado.</p>
-  <input class="field" id="nome" type="text" placeholder="Seu primeiro nome" autocomplete="given-name">
-  <input class="field" id="email" type="email" placeholder="Seu melhor e-mail" autocomplete="email" inputmode="email">
-  <button class="btn" onclick="submitCapture()">Ver meu resultado</button>
-  <button class="skip" onclick="go()">Prefiro só ver na tela</button>
-  <p class="consent">Ao continuar, você concorda em receber este resultado e materiais sobre rotina de cuidado. Dá para sair a qualquer momento.</p>
+  <h2 class="qtext">Como você se chama?</h2>
+  <p class="lede">Só o primeiro nome. É para o resultado falar com você, e não com "usuário".</p>
+  <input class="field" id="nome" type="text" placeholder="Seu primeiro nome" autocomplete="given-name" maxlength="24">
+  <button class="btn" onclick="go(false)">Ver meu resultado</button>
+  <button class="skip" onclick="go(true)">Prefiro não dizer</button>
 </div></section>
 
 <script>
+/* ─────────── de quem a pessoa cuida ─────────── */
+const PESSOAS = {
+  mae:    {g:'f', rot:'sua mãe'},
+  pai:    {g:'m', rot:'seu pai'},
+  esposa: {g:'f', rot:'sua esposa'},
+  marido: {g:'m', rot:'seu marido'},
+  outraF: {g:'f', rot:'ela'},
+  outroM: {g:'m', rot:'ele'}
+};
+let pessoa = 'mae';
+
+const PRON = {
+  f:{E:'ela', Ec:'Ela', DELE:'dela', SEU:'sua', BRAVO:'brava'},
+  m:{E:'ele', Ec:'Ele', DELE:'dele', SEU:'seu', BRAVO:'bravo'}
+};
+function tx(s){
+  const p = PRON[PESSOAS[pessoa].g];
+  return s.replace(/\{Ec\}/g,p.Ec).replace(/\{E\}/g,p.E)
+          .replace(/\{DELE\}/g,p.DELE).replace(/\{SEU\}/g,p.SEU)
+          .replace(/\{BRAVO\}/g,p.BRAVO)
+          .replace(/\{PESSOA\}/g,PESSOAS[pessoa].rot);
+}
+
+/* ─────────── perguntas ─────────── */
+/* pesos: A=não sabe que precisa · B=medo/corpo · C=pudor · D=sequência · E=ambiente */
 const QS=[
+ {q:"De quem você cuida?", help:"É só para o resultado falar do jeito certo.",
+  a:[{t:"Da minha mãe",p:'mae'},{t:"Do meu pai",p:'pai'},
+     {t:"Da minha esposa",p:'esposa'},{t:"Do meu marido",p:'marido'},
+     {t:"De outra mulher da família",p:'outraF'},{t:"De outro homem da família",p:'outroM'}]},
+
  {q:"Quando você avisa que é hora do banho, o que vem primeiro?",
-  a:[{t:"Diz que já tomou",w:{A:3}},{t:"Fica bravo na hora",w:{C:2,A:1}},
+  help:"Se acontecer mais de uma coisa, escolha a mais frequente.",
+  a:[{t:"Diz que já tomou",w:{A:3}},{t:"Fica {BRAVO} na hora",w:{C:2,A:1}},
      {t:"Concorda e não vai",w:{D:3}},{t:"Vai, mas trava dentro do banheiro",w:{D:2,B:2}}]},
+
  {q:"Em que ponto costuma desandar?",
   a:[{t:"Na hora de tirar a roupa",w:{C:3}},{t:"Quando a água encosta",w:{E:3}},
      {t:"No meio do banho",w:{D:2,E:1}},{t:"Na hora de sair e secar",w:{B:2,E:2}}]},
- {q:"O que ele costuma dizer?",
+
+ {q:"O que {E} costuma dizer?",
   a:[{t:"“Já tomei”",w:{A:3}},{t:"“Não precisa”",w:{A:2}},{t:"“Está frio”",w:{E:3}},
      {t:"“Me deixa”",w:{C:3}},{t:"Não fala, só resiste",w:{D:2,B:1}}]},
+
  {q:"O banheiro tem barra de apoio e piso antiderrapante?",
+  help:"A maioria das casas não tem. Dá para resolver por pouco dinheiro.",
   a:[{t:"Os dois",w:{}},{t:"Só um dos dois",w:{B:2}},{t:"Nenhum dos dois",w:{B:3}}]},
+
  {q:"Quem costuma dar o banho?",
-  a:[{t:"Filho ou filha",w:{C:3}},{t:"Cônjuge",w:{C:1}},
-     {t:"Cuidadora contratada",w:{C:2}},{t:"Varia bastante",w:{D:1,C:1}}]},
+  a:[{t:"Eu, filho ou filha",w:{C:3}},{t:"O marido ou a esposa",w:{C:1}},
+     {t:"Uma cuidadora contratada",w:{C:2}},{t:"Varia bastante",w:{D:1,C:1}}]},
+
  {q:"Como costuma ser o clima na hora?",
   a:[{t:"Com pressa, tenho horário",w:{E:3}},{t:"Tranquilo, dá tempo",w:{}}]},
+
  {q:"O que você já tentou?",
   a:[{t:"Insistir até conseguir",w:{A:2,C:1}},{t:"Negociar, prometer algo",w:{A:2}},
      {t:"Deixar para depois",w:{}},{t:"Já desisti algumas vezes",w:{B:1,D:1}}]},
+
  {q:"E como você se sente quando termina?",
+  help:"Não existe resposta errada aqui.",
   a:[{t:"Exausta",w:{}},{t:"Culpada",w:{}},
-     {t:"Com raiva, e depois culpada",w:{}},{t:"Com medo de machucar ele",w:{B:2}}]}
+     {t:"Com raiva, e depois culpada",w:{}},{t:"Com medo de machucar {E}",w:{B:2}}]}
 ];
 const TIE=["B","C","A","D","E"];
 let i=0,score={A:0,B:0,C:0,D:0,E:0},hist=[];
@@ -152,35 +207,50 @@ function show(id){
   document.getElementById(id).classList.add('on');window.scrollTo(0,0);
 }
 function start(){i=0;score={A:0,B:0,C:0,D:0,E:0};hist=[];show('quiz');render();}
+
 function render(){
   const c=QS[i];
   document.getElementById('bar').style.width=(i/QS.length*100)+'%';
   document.getElementById('qcount').textContent=`Pergunta ${i+1} de ${QS.length}`;
-  document.getElementById('qtext').textContent=c.q;
+  document.getElementById('qtext').textContent=tx(c.q);
+  const h=document.getElementById('qhelp');
+  h.textContent=c.help?tx(c.help):''; h.style.display=c.help?'block':'none';
   const box=document.getElementById('opts');box.innerHTML='';
-  c.a.forEach(op=>{const b=document.createElement('button');
-    b.className='opt';b.textContent=op.t;b.onclick=()=>pick(op.w);box.appendChild(b);});
+  c.a.forEach(op=>{
+    const b=document.createElement('button');
+    b.className='opt';
+    b.textContent=tx(op.t);
+    b.onclick=()=>pick(op);
+    box.appendChild(b);
+  });
   document.getElementById('back').style.visibility=i===0?'hidden':'visible';
 }
-function pick(w){
-  hist.push(w);for(const k in w)score[k]+=w[k];i++;
+function pick(op){
+  hist.push({w:op.w||{}, pAnterior: op.p?pessoa:null});
+  if(op.p) pessoa=op.p;
+  if(op.w) for(const k in op.w) score[k]+=op.w[k];
+  i++;
   if(i<QS.length){render();window.scrollTo(0,0);}
   else{document.getElementById('bar').style.width='100%';show('capture');}
 }
-function back(){if(!hist.length)return;const l=hist.pop();for(const k in l)score[k]-=l[k];i--;render();}
-function winner(){let b=0;for(const k in score)if(score[k]>b)b=score[k];return TIE.find(k=>score[k]===b)||"A";}
-function go(){
-  const s=[score.A,score.B,score.C,score.D,score.E].join('-');
-  location.href='resultado.html?p='+winner()+'&s='+s;
+function back(){
+  if(!hist.length)return;
+  const l=hist.pop();
+  for(const k in l.w) score[k]-=l.w[k];
+  if(l.pAnterior!==null) pessoa=l.pAnterior;
+  i--;render();
 }
-function submitCapture(){
-  const email=document.getElementById('email').value.trim();
-  const nome=document.getElementById('nome').value.trim();
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){document.getElementById('err').style.display='block';return;}
-  /* >>> CONECTE sua ferramenta de e-mail aqui. Envie nome, email e perfil.
+function winner(){let b=0;for(const k in score)if(score[k]>b)b=score[k];return TIE.find(k=>score[k]===b)||"A";}
+
+function go(semNome){
+  const s=[score.A,score.B,score.C,score.D,score.E].join('-');
+  const campo=document.getElementById('nome');
+  const nome = semNome ? '' : (campo.value||'').trim().slice(0,24);
+  /* >>> Para guardar o lead, envie aqui nome + perfil para sua ferramenta.
      Não grave as respostas individuais junto do nome — dado sensível (LGPD). <<< */
-  console.log({nome,email,perfil:winner()});
-  go();
+  let url='resultado.html?p='+winner()+'&s='+s+'&q='+pessoa;
+  if(nome) url+='&n='+encodeURIComponent(nome);
+  location.href=url;
 }
 </script>
 </body>
