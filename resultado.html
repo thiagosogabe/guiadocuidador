@@ -7,6 +7,19 @@
 <meta name="supported-color-schemes" content="light">
 <title>Seu resultado | O banho sem briga</title>
 <meta name="robots" content="noindex">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','28111624875156228');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=28111624875156228&ev=PageView&noscript=1"/></noscript>
+<!-- /Meta Pixel -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -607,10 +620,30 @@ const SITUACOES=[
 })();
 
 /* ═══════════ CHECKOUT ═══════════ */
+/* Lead: a pessoa chegou no relatório — é este o público do lookalike */
+if(window.fbq){
+  fbq('track','Lead',{content_name:'Relatorio do quiz', content_category:p});
+}
+
 const CHECKOUT='https://lastlink.com/p/C7DD0368E/checkout-payment/';
 document.getElementById('cta').href =CHECKOUT+'?utm_content='+p;
 document.getElementById('cta2').href=CHECKOUT+'?utm_content='+p+'&pos=fim';
 document.getElementById('cta3').href=CHECKOUT+'?utm_content='+p+'&pos=barra';
+
+/* InitiateCheckout: clique em qualquer botão de compra */
+['cta','cta2','cta3'].forEach(function(id){
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('click',function(){
+    if(window.fbq){
+      fbq('track','InitiateCheckout',{
+        value:37.00, currency:'BRL',
+        content_name:'Como dar banho sem briga',
+        content_category:p, content_ids:[id]
+      });
+    }
+  });
+});
 
 const alvo=document.getElementById('oferta'), st=document.getElementById('sticky');
 addEventListener('scroll',()=>{
