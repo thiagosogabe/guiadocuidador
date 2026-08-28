@@ -6,6 +6,19 @@
 <meta name="color-scheme" content="light only">
 <meta name="supported-color-schemes" content="light">
 <title>Para famílias que enfrentam o Alzheimer | O banho sem briga</title>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','28111624875156228');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=28111624875156228&ev=PageView&noscript=1"/></noscript>
+<!-- /Meta Pixel -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -206,7 +219,11 @@ function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
   document.getElementById(id).classList.add('on');window.scrollTo(0,0);
 }
-function start(){i=0;score={A:0,B:0,C:0,D:0,E:0};hist=[];show('quiz');render();}
+function start(){
+  i=0;score={A:0,B:0,C:0,D:0,E:0};hist=[];
+  if(window.fbq) fbq('trackCustom','QuizIniciado');
+  show('quiz');render();
+}
 
 function render(){
   const c=QS[i];
@@ -248,9 +265,13 @@ function go(semNome){
   const nome = semNome ? '' : (campo.value||'').trim().slice(0,24);
   /* >>> Para guardar o lead, envie aqui nome + perfil para sua ferramenta.
      Não grave as respostas individuais junto do nome — dado sensível (LGPD). <<< */
-  let url='resultado.html?p='+winner()+'&s='+s+'&q='+pessoa;
+  const perfil=winner();
+  if(window.fbq){
+    fbq('trackCustom','QuizConcluido',{perfil:perfil, com_nome: nome?1:0});
+  }
+  let url='resultado.html?p='+perfil+'&s='+s+'&q='+pessoa;
   if(nome) url+='&n='+encodeURIComponent(nome);
-  location.href=url;
+  setTimeout(function(){ location.href=url; }, 250);
 }
 </script>
 </body>
