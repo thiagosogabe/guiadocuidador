@@ -233,6 +233,29 @@ details p{color:#4B3A5E !important}
 .top h1,.turn h2,.buy h2{color:#fff !important}
 .turn p,.buy>.wrap>p{color:#D9CCE8 !important}
 .gaps li{background:rgba(255,255,255,.10) !important;color:#EFE6F7 !important}
+/* ---------- oferta antecipada ---------- */
+.oferta1{padding:6px 0 34px}
+.box1{background:#FDF4ED;border:1px solid #F0E2D6;border-radius:22px;
+  padding:30px 22px;text-align:center;box-shadow:0 12px 34px rgba(0,0,0,.18)}
+.box1 *{color:#241533}
+.box1 h2{font-size:clamp(27px,7vw,34px);margin:6px 0 10px;color:#3D2A52 !important}
+.box1 .l1{font-size:16px;color:#4B3A5E !important;margin-bottom:20px}
+.pr1{margin-bottom:20px}
+.pr1 .v1{display:block;font-family:'Outfit',sans-serif;font-size:19px;font-weight:700;
+  color:#D6301F !important;text-decoration:line-through;margin-bottom:2px}
+.pr1 .v2{display:block;font-family:'Outfit',sans-serif;font-size:52px;font-weight:800;
+  color:#116B3C !important;line-height:1.1}
+.box1 .btn,.box1 .btn small{color:#fff !important}
+.g1{font-size:13px;color:#6B5B7A !important;margin-top:14px}
+.mais{text-align:center;font-size:15px;color:#4B3A5E;margin-top:20px}
+.mais a{color:#116B3C;font-weight:700;text-decoration:none}
+
+/* ---------- limite das ações gratuitas ---------- */
+.limite{margin-top:26px;padding:20px 22px;border-radius:16px;
+  background:#F3EDF9;border-left:5px solid #7B5AA6}
+.limite p{font-size:16.5px;color:#463356 !important;margin:0;line-height:1.55}
+.limite strong{color:#2E1F40 !important;font-weight:700}
+
 footer{background:#1E1129 !important}
 footer,footer p{color:#A697B4 !important}
 .sticky{background:#FFF8F1 !important}
@@ -282,7 +305,7 @@ body.haspop .pop{bottom:80px}
 <div class="wrap">
   <div class="chart">
     <h3>Onde está o desgaste no seu caso</h3>
-    <p class="cap">Gerado a partir das suas 8 respostas.</p>
+    <p class="cap">Gerado a partir das suas respostas.</p>
     <div id="bars"></div>
   </div>
 </div>
@@ -297,6 +320,9 @@ body.haspop .pop{bottom:80px}
   <h2>Faça isso hoje à noite</h2>
   <div id="v-actions"></div>
   <div class="alert" id="v-safety" style="display:none"></div>
+  <div class="limite">
+    <p><strong>Isso vale para hoje.</strong> O problema é que amanhã o motivo pode ser outro — e aí você volta a estar no escuro, tentando adivinhar de novo.</p>
+  </div>
 </div></section>
 
 <section class="turn"><div class="wrap">
@@ -312,8 +338,22 @@ body.haspop .pop{bottom:80px}
   </ul>
 </div></section>
 
+
+<!-- ══════════ OFERTA ANTECIPADA ══════════ -->
+<section class="oferta1" id="oferta1"><div class="wrap">
+  <div class="box1">
+    <span class="pill green">TUDO ISSO ESTÁ NO GUIA</span>
+    <h2>O banho sem briga</h2>
+    <p class="l1">O passo a passo completo de uma tarefa só. Você lê em 40 minutos e usa hoje à noite.</p>
+    <div class="pr1"><span class="v1">R$ 99,90</span><span class="v2">R$ 37,00</span></div>
+    <a class="btn" id="cta0" href="https://lastlink.com/p/C7DD0368E/checkout-payment/">QUERO O GUIA AGORA<small>Chega no e-mail que você informar na compra</small></a>
+    <p class="g1">7 dias de garantia · Acesso imediato · Pagamento seguro</p>
+  </div>
+  <p class="mais">Quer saber tudo o que vem dentro? <a href="#detalhes">Continue lendo ↓</a></p>
+</div></section>
+
 <!-- ══════════ D E S E J O ══════════ -->
-<section class="sec"><div class="wrap">
+<section class="sec" id="detalhes"><div class="wrap">
   <span class="pill dark">O GUIA</span>
   <h2 style="font-size:clamp(28px,7.6vw,38px)">O banho sem briga</h2>
   <p><strong>Não é curso sobre a doença.</strong> É o passo a passo de uma tarefa só — a que mais gera briga dentro de casa. Você lê em 40 minutos e usa hoje à noite.</p>
@@ -591,6 +631,36 @@ VENDAS.forEach((v,idx)=>{
 })();
 
 
+
+/* ═══════════ PROFUNDIDADE DE LEITURA ═══════════
+   Marca até onde a pessoa rolou. É isso que vai dizer
+   em que ponto exato o funil perde gente.
+   ═══════════════════════════════════════════════ */
+(function(){
+  const marcos=[
+    ['LeuRelatorio',   'v-actions'],
+    ['LeuVirada',      'oferta1'],
+    ['ViuOfertaTopo',  'detalhes'],
+    ['ViuOfertaFinal', 'oferta']
+  ];
+  const feitos={};
+  function checa(){
+    marcos.forEach(function(m){
+      if(feitos[m[0]]) return;
+      const el=document.getElementById(m[1]);
+      if(!el) return;
+      const r=el.getBoundingClientRect();
+      if(r.top < innerHeight*0.75){
+        feitos[m[0]]=1;
+        if(window.fbq) fbq('trackCustom',m[0],{perfil:p});
+      }
+    });
+  }
+  addEventListener('scroll',checa,{passive:true});
+  addEventListener('load',checa);
+  setTimeout(checa,800);
+})();
+
 /* ═══════════ SLIDER DE RECONHECIMENTO ═══════════
    Não são depoimentos de clientes: são situações comuns,
    escritas em primeira pessoa, sem atribuição a ninguém.
@@ -626,12 +696,13 @@ if(window.fbq){
 }
 
 const CHECKOUT='https://lastlink.com/p/C7DD0368E/checkout-payment/';
+document.getElementById('cta0').href =CHECKOUT+'?utm_content='+p+'&pos=topo';
 document.getElementById('cta').href =CHECKOUT+'?utm_content='+p;
 document.getElementById('cta2').href=CHECKOUT+'?utm_content='+p+'&pos=fim';
 document.getElementById('cta3').href=CHECKOUT+'?utm_content='+p+'&pos=barra';
 
 /* InitiateCheckout: clique em qualquer botão de compra */
-['cta','cta2','cta3'].forEach(function(id){
+['cta0','cta','cta2','cta3'].forEach(function(id){
   const el=document.getElementById(id);
   if(!el) return;
   el.addEventListener('click',function(){
@@ -645,7 +716,7 @@ document.getElementById('cta3').href=CHECKOUT+'?utm_content='+p+'&pos=barra';
   });
 });
 
-const alvo=document.getElementById('oferta'), st=document.getElementById('sticky');
+const alvo=document.getElementById('oferta1')||document.getElementById('oferta'), st=document.getElementById('sticky');
 addEventListener('scroll',()=>{
   const on=alvo.getBoundingClientRect().top<0;
   st.classList.toggle('on',on);
