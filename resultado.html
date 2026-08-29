@@ -652,7 +652,7 @@ VENDAS.forEach((v,idx)=>{
       const r=el.getBoundingClientRect();
       if(r.top < innerHeight*0.75){
         feitos[m[0]]=1;
-        if(window.fbq) fbq('trackCustom',m[0],{perfil:p});
+        if(window.fbq) fbq('trackCustom',m[0],{perfil:p, currency:'BRL'});
       }
     });
   }
@@ -692,7 +692,12 @@ const SITUACOES=[
 /* ═══════════ CHECKOUT ═══════════ */
 /* Lead: a pessoa chegou no relatório — é este o público do lookalike */
 if(window.fbq){
-  fbq('track','Lead',{content_name:'Relatorio do quiz', content_category:p});
+  fbq('track','Lead',{
+    value: 1.50,            /* valor estimado de um lead — ajuste quando tiver vendas */
+    currency: 'BRL',
+    content_name:'Relatorio do quiz',
+    content_category:p
+  });
 }
 
 const CHECKOUT='https://lastlink.com/p/C7DD0368E/checkout-payment/';
