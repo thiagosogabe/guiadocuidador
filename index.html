@@ -221,7 +221,7 @@ function show(id){
 }
 function start(){
   i=0;score={A:0,B:0,C:0,D:0,E:0};hist=[];
-  if(window.fbq) fbq('trackCustom','QuizIniciado');
+  if(window.fbq) fbq('trackCustom','QuizIniciado',{currency:'BRL'});
   show('quiz');render();
 }
 
@@ -267,7 +267,7 @@ function go(semNome){
      Não grave as respostas individuais junto do nome — dado sensível (LGPD). <<< */
   const perfil=winner();
   if(window.fbq){
-    fbq('trackCustom','QuizConcluido',{perfil:perfil, com_nome: nome?1:0});
+    fbq('trackCustom','QuizConcluido',{perfil:perfil, com_nome: nome?1:0, currency:'BRL'});
   }
   let url='resultado.html?p='+perfil+'&s='+s+'&q='+pessoa;
   if(nome) url+='&n='+encodeURIComponent(nome);
