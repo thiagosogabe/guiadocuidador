@@ -701,10 +701,19 @@ if(window.fbq){
 }
 
 const CHECKOUT='https://lastlink.com/p/C7DD0368E/checkout-payment/';
-document.getElementById('cta0').href =CHECKOUT+'?utm_content='+p+'&pos=topo';
-document.getElementById('cta').href =CHECKOUT+'?utm_content='+p;
-document.getElementById('cta2').href=CHECKOUT+'?utm_content='+p+'&pos=fim';
-document.getElementById('cta3').href=CHECKOUT+'?utm_content='+p+'&pos=barra';
+/* carrega fbclid e UTMs adiante, até o checkout */
+const extras=(function(){
+  let e='';
+  ['fbclid','utm_source','utm_medium','utm_campaign','utm_term'].forEach(function(k){
+    const v=qp.get(k); if(v) e+='&'+k+'='+encodeURIComponent(v);
+  });
+  return e;
+})();
+
+document.getElementById('cta0').href =CHECKOUT+'?utm_content='+p+'&pos=topo'+extras;
+document.getElementById('cta').href =CHECKOUT+'?utm_content='+p+extras;
+document.getElementById('cta2').href=CHECKOUT+'?utm_content='+p+'&pos=fim'+extras;
+document.getElementById('cta3').href=CHECKOUT+'?utm_content='+p+'&pos=barra'+extras;
 
 /* InitiateCheckout: clique em qualquer botão de compra */
 ['cta0','cta','cta2','cta3'].forEach(function(id){
