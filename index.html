@@ -271,6 +271,16 @@ function go(semNome){
   }
   let url='resultado.html?p='+perfil+'&s='+s+'&q='+pessoa;
   if(nome) url+='&n='+encodeURIComponent(nome);
+
+  /* repassa fbclid e UTMs para a página de resultado.
+     Sem isso, o Meta perde a ligação entre o clique no anúncio
+     e os eventos da página de vendas (fbc), e a atribuição piora. */
+  const entrada=new URLSearchParams(location.search);
+  ['fbclid','gclid','ttclid','utm_source','utm_medium','utm_campaign','utm_content','utm_term']
+    .forEach(function(k){
+      const v=entrada.get(k);
+      if(v) url+='&'+k+'='+encodeURIComponent(v);
+    });
   setTimeout(function(){ location.href=url; }, 250);
 }
 </script>
